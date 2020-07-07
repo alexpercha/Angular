@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EventEmitter } from 'protractor';
 
 @Component({
   selector: 'app-progress',
@@ -7,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
   ]
 })
 export class ProgressComponent implements OnInit {
+
+  progresoAzul = 30;
+  progresoVerde = 20;
 
   constructor() { }
 

@@ -11,6 +11,7 @@ import { APP_ROUTES } from './app.routes';
 
 // MODULOS
 import { PageModule } from './pages/page.module';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -24,7 +25,8 @@ import { PageModule } from './pages/page.module';
     BrowserModule,
     AppRoutingModule,
     APP_ROUTES,
-    PageModule
+    PageModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

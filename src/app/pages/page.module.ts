@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { IncrementadorComponent } from '../components/incrementador/incrementador.component';
 import { ChartsModule } from 'ng2-charts';
 import { GraficoDonaComponent } from '../components/graficas/grafico-dona.component';
+import { AccoutSettingsComponent } from './accout-settings/accout-settings.component';
 
 
 
@@ -21,7 +22,8 @@ import { GraficoDonaComponent } from '../components/graficas/grafico-dona.compon
         Grafica1Component,
         ProgressComponent,
         IncrementadorComponent,
-        GraficoDonaComponent
+        GraficoDonaComponent,
+        AccoutSettingsComponent
     ],
     exports: [
         PagesComponent,

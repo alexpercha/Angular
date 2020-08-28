@@ -6,11 +6,12 @@ import { Grafica1Component } from './grafica1/grafica1.component';
 import { AccoutSettingsComponent } from './accout-settings/accout-settings.component';
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
+import { AuthGuard } from '../guards/auth.guard';
 
 
 
 const pagesRoutes: Routes = [
-    { path: '', component: PagesComponent, children: [
+    { path: '', component: PagesComponent, canActivate: [AuthGuard] , children: [
         { path: 'dashboard', component: DashboardComponent, data: { titulo: 'dashboard'}  },
         { path: 'progress', component: ProgressComponent, data: { titulo: 'progress'} },
         { path: 'grafica1', component: Grafica1Component, data: { titulo: 'grafica1'} },

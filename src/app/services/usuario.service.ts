@@ -6,9 +6,7 @@ import { LoginForm } from '../interfaces/login.interface';
 import { environment } from '../../environments/environment';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
-import { promise } from 'protractor';
-import { rejects } from 'assert';
-import { resolve } from 'dns';
+import { Usuario } from '../models/usuario.models';
 
 
 declare const gapi: any;
@@ -20,11 +18,19 @@ const base_url = environment.base_url;
 export class UsuarioService {
 
   public auth2: any;
+  public usuario: Usuario;
 
   constructor( private http: HttpClient,
                private router: Router,
                private ngZone: NgZone) {
     this.googleInit();
+  }
+
+  get token(): string {
+    return localStorage.getItem('token') || '';
+  }
+  get uid(): string {
+    return this.usuario.uid || '';
   }
 
   googleInit() {
@@ -72,16 +78,18 @@ export class UsuarioService {
 
   validationToken(): Observable<boolean> {
 
-    const token = localStorage.getItem('token') || '';
     return this.http.get(`${ base_url }/login/renew`, {
       headers: {
-        'x-token': token
+        'x-token': this.token
       }
     }).pipe(
-      tap( (resp: any) => {
+      map( (resp: any) => {
         console.log(resp);
+        const { email, google, img = '', nombre, role, uid } = resp.usuario;
+        this.usuario = new Usuario(nombre, email, '', img , google, role, uid );
         localStorage.setItem('token', resp.token);
-      }), map( resp => true),
+        return true;
+      }),
       catchError( error => of(false))
     );
   }
@@ -93,6 +101,14 @@ export class UsuarioService {
       this.ngZone.run( () => {
         this.router.navigateByUrl('/login');
       });
+    });
+  }
+
+  actualizarperfil( data: {nombre: string, email: string}) {
+    return this.http.put(`${ base_url }/usuarios/${this.uid}`, data, {
+      headers: {
+        'x-token': this.token
+      }
     });
   }
 

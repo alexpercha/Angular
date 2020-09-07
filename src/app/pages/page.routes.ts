@@ -8,6 +8,9 @@ import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { AuthGuard } from '../guards/auth.guard';
+import { HospitalesComponent } from './matenimiento/hospitales/hospitales.component';
+import { MedicosComponent } from './matenimiento/medicos/medicos.component';
+import { UsuariosComponent } from './matenimiento/usuarios/usuarios.component';
 
 
 
@@ -20,6 +23,9 @@ const pagesRoutes: Routes = [
         { path: 'promesas', component: PromesasComponent, data: { titulo: 'Promesas'} },
         { path: 'rxjs', component: RxjsComponent, data: { titulo: 'Rxjs'} },
         { path: 'account-settings', component: AccoutSettingsComponent, data: { titulo: 'Account-settings'} },
+        { path: 'usuarios', component: UsuariosComponent, data: { titulo: 'Usuarios'} },
+        { path: 'hospitales', component: HospitalesComponent, data: { titulo: 'Hospitales'} },
+        { path: 'medicos', component: MedicosComponent, data: { titulo: 'Medicos'} },
         { path: '', pathMatch: 'full', redirectTo: '/dashboard'}
     ]}
 ];

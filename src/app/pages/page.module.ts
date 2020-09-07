@@ -16,6 +16,10 @@ import { AccoutSettingsComponent } from './accout-settings/accout-settings.compo
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import { UsuariosComponent } from './matenimiento/usuarios/usuarios.component';
+import { HospitalesComponent } from './matenimiento/hospitales/hospitales.component';
+import { MedicosComponent } from './matenimiento/medicos/medicos.component';
+import { ModalImagenComponent } from '../components/modal-imagen/modal-imagen.component';
 
 
 
@@ -30,14 +34,19 @@ import { PerfilComponent } from './perfil/perfil.component';
         AccoutSettingsComponent,
         PromesasComponent,
         RxjsComponent,
-        PerfilComponent
+        PerfilComponent,
+        UsuariosComponent,
+        HospitalesComponent,
+        MedicosComponent,
+        ModalImagenComponent
     ],
     exports: [
         PagesComponent,
         DashboardComponent,
         Grafica1Component,
         ProgressComponent,
-        IncrementadorComponent
+        IncrementadorComponent,
+        ModalImagenComponent
     ],
     imports: [
         SharedModule,

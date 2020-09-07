@@ -4,7 +4,6 @@ import { UsuarioService } from '../../services/usuario.service';
 import { Usuario } from '../../models/usuario.models';
 import { FileUploadService } from 'src/app/services/file-upload.service';
 import Swal from 'sweetalert2';
-import { Title } from '@angular/platform-browser';
 
 
 @Component({

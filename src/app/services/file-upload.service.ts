@@ -31,6 +31,7 @@ export class FileUploadService {
       );
       const data = await resp.json();
 
+      console.log(data);
       if ( data.ok ) {
         return data.nombreArchivo;
       } else {
@@ -41,6 +42,7 @@ export class FileUploadService {
 
     } catch (error) {
       console.log(error);
+      console.log('entro a este error');
       return false;
     }
   }

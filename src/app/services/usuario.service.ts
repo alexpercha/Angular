@@ -1,12 +1,13 @@
 import { Injectable, NgZone } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { tap, map, catchError } from 'rxjs/operators';
+import { tap, map, catchError, delay } from 'rxjs/operators';
 import { RegisterForm } from '../interfaces/register.interface';
 import { LoginForm } from '../interfaces/login.interface';
 import { environment } from '../../environments/environment';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { Usuario } from '../models/usuario.models';
+import { CargarUsuario } from '../interfaces/cargar-usuario.interface';
 
 
 declare const gapi: any;
@@ -31,6 +32,13 @@ export class UsuarioService {
   }
   get uid(): string {
     return this.usuario.uid || '';
+  }
+  get headers() {
+    return {
+      headers: {
+        'x-token': this.token
+      }
+    };
   }
 
   googleInit() {
@@ -78,13 +86,8 @@ export class UsuarioService {
 
   validationToken(): Observable<boolean> {
 
-    return this.http.get(`${ base_url }/login/renew`, {
-      headers: {
-        'x-token': this.token
-      }
-    }).pipe(
+    return this.http.get(`${ base_url }/login/renew`, this.headers).pipe(
       map( (resp: any) => {
-        console.log(resp);
         const { email, google, img = '', nombre, role, uid } = resp.usuario;
         this.usuario = new Usuario(nombre, email, '', img , google, role, uid );
         localStorage.setItem('token', resp.token);
@@ -105,11 +108,32 @@ export class UsuarioService {
   }
 
   actualizarperfil( data: {nombre: string, email: string}) {
-    return this.http.put(`${ base_url }/usuarios/${this.uid}`, data, {
-      headers: {
-        'x-token': this.token
-      }
-    });
+    return this.http.put(`${ base_url }/usuarios/${this.uid}`, data, this.headers);
+  }
+
+  actualizarRole( usuario: Usuario) {
+    return this.http.put(`${ base_url }/usuarios/${usuario.uid}`, usuario, this.headers);
+  }
+  cargarUsuarios( desde: number = 0 ) {
+
+    const url = `${ base_url }/usuarios?desde=${ desde }`;
+    return this.http.get<CargarUsuario>( url, this.headers )
+            .pipe(
+              map( resp => {
+                const usuarios = resp.usuarios.map(
+                  user => new Usuario(user.nombre, user.email, '', user.img, user.google, user.role, user.uid )
+                );
+                return {
+                  total: resp.total,
+                  usuarios
+                };
+              })
+            );
+  }
+
+  borrarUsuario( usuario: Usuario) {
+    const url = `${ base_url }/usuarios/${ usuario.uid }`;
+    return this.http.delete( url, this.headers );
   }
 
 }

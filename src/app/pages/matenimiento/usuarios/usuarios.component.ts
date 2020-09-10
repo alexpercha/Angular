@@ -38,7 +38,6 @@ export class UsuariosComponent implements OnInit, OnDestroy {
     this.cargando = true;
     this.usuarioService.cargarUsuarios(this.desde)
     .subscribe( (resp) => {
-      console.log(resp);
       this.totalRegistros = resp.total;
       this.usuarios = resp.usuarios;
       this.usuariosTemp = resp.usuarios;
@@ -69,9 +68,8 @@ export class UsuariosComponent implements OnInit, OnDestroy {
       return;
     }
 
-    console.log(valor);
     this.busquedaService.buscarTexto( 'usuarios', valor)
-    .subscribe( resp => {
+    .subscribe( (resp: Usuario[]) => {
       this.usuarios = resp;
       this.cargando = false;
     });
@@ -109,6 +107,6 @@ export class UsuariosComponent implements OnInit, OnDestroy {
   }
 
   cambiarImagen(usuario: Usuario) {
-    this.modalImagenService.abrirModal(usuario);
+    this.modalImagenService.abrirModal('usuarios', usuario.uid, usuario.img);
   }
 }

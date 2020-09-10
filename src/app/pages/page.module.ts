@@ -20,6 +20,9 @@ import { UsuariosComponent } from './matenimiento/usuarios/usuarios.component';
 import { HospitalesComponent } from './matenimiento/hospitales/hospitales.component';
 import { MedicosComponent } from './matenimiento/medicos/medicos.component';
 import { ModalImagenComponent } from '../components/modal-imagen/modal-imagen.component';
+import { PipesModule } from '../pipes/pipes.module';
+import { MedicoComponent } from './matenimiento/medicos/medico.component';
+
 
 
 
@@ -38,7 +41,8 @@ import { ModalImagenComponent } from '../components/modal-imagen/modal-imagen.co
         UsuariosComponent,
         HospitalesComponent,
         MedicosComponent,
-        ModalImagenComponent
+        ModalImagenComponent,
+        MedicoComponent
     ],
     exports: [
         PagesComponent,
@@ -54,7 +58,8 @@ import { ModalImagenComponent } from '../components/modal-imagen/modal-imagen.co
         PAGES_ROUTES,
         FormsModule,
         ChartsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        PipesModule
     ]
 })
 

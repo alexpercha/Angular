@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalImagenService } from '../../services/modal-imagen.service';
 import { FileUploadService } from '../../services/file-upload.service';
-import { Usuario } from '../../models/usuario.models';
-import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-modal-imagen',
@@ -14,7 +13,6 @@ export class ModalImagenComponent implements OnInit {
 
 
   public imgTemp: any;
-  public usuario: Usuario;
   public archivo: File;
 
   constructor( public modalImagenService: ModalImagenService,
@@ -47,10 +45,12 @@ export class ModalImagenComponent implements OnInit {
   guardarImagen() {
 
     const uid = this.modalImagenService.uid;
+    const tipo = this.modalImagenService.tipo;
 
-    this.fileService.actualizarFoto(this.archivo, 'usuarios', uid)
+    this.fileService.actualizarFoto(this.archivo, tipo , uid)
     .then( img => {
       this.modalImagenService.nuevaImagen.emit(img);
+      this.imgTemp = null;
       this.cerrarModal();
     }).catch( error => {
       console.log(error);

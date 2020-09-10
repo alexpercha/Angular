@@ -11,6 +11,7 @@ import { AuthGuard } from '../guards/auth.guard';
 import { HospitalesComponent } from './matenimiento/hospitales/hospitales.component';
 import { MedicosComponent } from './matenimiento/medicos/medicos.component';
 import { UsuariosComponent } from './matenimiento/usuarios/usuarios.component';
+import { MedicoComponent } from './matenimiento/medicos/medico.component';
 
 
 
@@ -23,9 +24,10 @@ const pagesRoutes: Routes = [
         { path: 'promesas', component: PromesasComponent, data: { titulo: 'Promesas'} },
         { path: 'rxjs', component: RxjsComponent, data: { titulo: 'Rxjs'} },
         { path: 'account-settings', component: AccoutSettingsComponent, data: { titulo: 'Account-settings'} },
-        { path: 'usuarios', component: UsuariosComponent, data: { titulo: 'Usuarios'} },
-        { path: 'hospitales', component: HospitalesComponent, data: { titulo: 'Hospitales'} },
-        { path: 'medicos', component: MedicosComponent, data: { titulo: 'Medicos'} },
+        { path: 'usuarios', component: UsuariosComponent, data: { titulo: 'Mantenimiento usuarios'} },
+        { path: 'hospitales', component: HospitalesComponent, data: { titulo: 'Matenimiento hospitales'} },
+        { path: 'medicos', component: MedicosComponent, data: { titulo: 'Mantenimiento medicos'} },
+        { path: 'medico/:id', component: MedicoComponent, data: { titulo: 'Mantenimiento medico'} },
         { path: '', pathMatch: 'full', redirectTo: '/dashboard'}
     ]}
 ];

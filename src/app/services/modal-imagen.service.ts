@@ -1,5 +1,9 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Usuario } from '../models/usuario.models';
+import { ImagenUrlPipe } from '../pipes/imagen-url.pipe';
+import { environment } from '../../environments/environment';
+
+const base_url = environment.base_url;
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +11,7 @@ import { Usuario } from '../models/usuario.models';
 export class ModalImagenService {
 
   private ocultarModal = true;
+  public tipo: string;
   public img: string;
   public uid: string;
   public nuevaImagen: EventEmitter<string> = new EventEmitter();
@@ -17,10 +22,18 @@ export class ModalImagenService {
     return this.ocultarModal;
   }
 
-  abrirModal(usuario: Usuario) {
+  abrirModal(tipo: string, uid: string, img: string = 'no-img') {
     this.ocultarModal = false;
-    this.img = usuario.imagenUrl;
-    this.uid = usuario.uid;
+    this.uid = uid;
+    this.tipo = tipo;
+
+    if (img.includes('http')) {
+      this.img = img;
+    } else {
+      this.img = `${base_url}/upload/${tipo}/${img}`;
+    }
+    console.log(this.img);
+
   }
 
   cerrarModal() {

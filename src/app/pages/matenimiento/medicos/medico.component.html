@@ -5,7 +5,7 @@
                 <h4 class="card-title">Medico</h4>
                 <h6 class="card-subtitle">Ingrese la informacion</h6>
                 <form class="form-horizontal p-t-20" [formGroup]="medicoForm" (submit)="guardarMedico()">
-                    <div *ngIf="medicoSeleccionado" class="form-group text-center">
+                    <div class="form-group text-center">
                         <div class="col">
                             <div>
                                 <img class="w200 cursor" [src]="medicoSeleccionado.img |imagenUrl: 'medicos'" alt="" (click)="cambiarImagen(medicoSeleccionado)">

@@ -8,6 +8,7 @@ import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { Usuario } from '../models/usuario.models';
 import { CargarUsuario } from '../interfaces/cargar-usuario.interface';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 declare const gapi: any;
@@ -33,12 +34,21 @@ export class UsuarioService {
   get uid(): string {
     return this.usuario.uid || '';
   }
+  get role(): 'ADMIN_ROLE' | 'USER_ROLE'  {
+    return this.usuario.role;
+  }
   get headers() {
     return {
       headers: {
         'x-token': this.token
       }
     };
+  }
+
+  guardarLocalStorage(token: string, menu: any) {
+
+    localStorage.setItem('token', token);
+    localStorage.setItem('menu', JSON.stringify(menu));
   }
 
   googleInit() {
@@ -60,7 +70,7 @@ export class UsuarioService {
     return this.http.post(`${ base_url }/usuarios`, fromData)
             .pipe(
               tap( (resp: any) => {
-                localStorage.setItem('token', resp.token);
+                this.guardarLocalStorage(resp.token, resp.menu);
               })
             );
 
@@ -70,16 +80,17 @@ export class UsuarioService {
     return this.http.post(`${ base_url }/login`, fromData)
             .pipe(
               tap( (resp: any) => {
-                localStorage.setItem('token', resp.token);
+                this.guardarLocalStorage(resp.token, resp.menu);
               })
             );
   }
 
   loginGoole( token: string ) {
+    localStorage.removeItem('menu');
     return this.http.post(`${ base_url }/login/google`, {token})
             .pipe(
               tap( (resp: any) => {
-                localStorage.setItem('token', resp.token);
+                this.guardarLocalStorage(resp.token, resp.menu);
               })
             );
   }
@@ -90,7 +101,7 @@ export class UsuarioService {
       map( (resp: any) => {
         const { email, google, img = '', nombre, role, uid } = resp.usuario;
         this.usuario = new Usuario(nombre, email, '', img , google, role, uid );
-        localStorage.setItem('token', resp.token);
+        this.guardarLocalStorage(resp.token, resp.menu);
         return true;
       }),
       catchError( error => of(false))
@@ -99,6 +110,7 @@ export class UsuarioService {
 
   logOut() {
     localStorage.removeItem('token');
+    localStorage.removeItem('menu');
 
     this.auth2.signOut().then( () => {
       this.ngZone.run( () => {

@@ -22,6 +22,7 @@ import { MedicosComponent } from './matenimiento/medicos/medicos.component';
 import { ModalImagenComponent } from '../components/modal-imagen/modal-imagen.component';
 import { PipesModule } from '../pipes/pipes.module';
 import { MedicoComponent } from './matenimiento/medicos/medico.component';
+import { BusquedaComponent } from './busqueda/busqueda.component';
 
 
 
@@ -42,7 +43,8 @@ import { MedicoComponent } from './matenimiento/medicos/medico.component';
         HospitalesComponent,
         MedicosComponent,
         ModalImagenComponent,
-        MedicoComponent
+        MedicoComponent,
+        BusquedaComponent
     ],
     exports: [
         PagesComponent,

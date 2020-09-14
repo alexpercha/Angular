@@ -40,6 +40,7 @@ export class RegisterComponent implements OnInit {
     .subscribe((resp) => {
         this.router.navigateByUrl('/dashboard');
       }, (error) => {
+        console.log(error);
         Swal.fire( 'Error', error.error.msg, 'error');
       });
   }

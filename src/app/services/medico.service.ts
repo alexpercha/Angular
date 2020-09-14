@@ -43,7 +43,6 @@ export class MedicoService {
     .pipe(
       delay(100),
       map( (resp: {ok: string, medicos: Medico}) => {
-        console.log('consulta medico:', resp );
         return resp.medicos;
       })
     );
@@ -51,7 +50,6 @@ export class MedicoService {
 
   crearMedico( medico: { nombre: string, hospital: string} ) {
 
-    console.log(medico);
     const url = `${ base_url }/medicos`;
     return this.http.post( url, medico , this.headers );
   }

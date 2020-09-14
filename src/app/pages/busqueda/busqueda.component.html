@@ -1,0 +1,84 @@
+<div class="row animated fadeIn">
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Usuarios</h4>
+                <h6 class="card-subtitle">Resultados</h6>
+                <div *ngIf="usuarios.length === 0" class="alert alert-info" role="alert">
+                    <p> No se encontrar registros</p>
+                </div>
+                <div *ngIf="usuarios.length > 0" class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Avatar</th>
+                                <th>Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let usuario of usuarios">
+                                <td> <img class="w100" [src]="usuario.img |imagenUrl:'usuarios'" alt=""> </td>
+                                <td> {{usuario.nombre}} </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Medicos</h4>
+                <h6 class="card-subtitle">Resultados</h6>
+                <div *ngIf="medicos.length === 0" class="alert alert-info" role="alert">
+                    <p> No se encontrar registros</p>
+                </div>
+                <div *ngIf="medicos.length > 0" class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Avatar</th>
+                                <th>Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let medico of medicos">
+                                <td> <img class="w100" [src]="medico.img |imagenUrl:'medicos'" alt=""> </td>
+                                <td><a [routerLink]="['/medico',medico.uid]">{{medico.nombre}}</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Hospitales</h4>
+                <h6 class="card-subtitle">Resultados</h6>
+                <div *ngIf="hospitales.length === 0" class="alert alert-info" role="alert">
+                    <p> No se encontrar registros</p>
+                </div>
+                <div *ngIf="hospitales.length > 0" class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Avatar</th>
+                                <th>Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let hospital of hospitales">
+                                <td> <img class="w100" [src]="hospital.img |imagenUrl:'hospitales'" alt=""> </td>
+                                <td>{{hospital.nombre}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

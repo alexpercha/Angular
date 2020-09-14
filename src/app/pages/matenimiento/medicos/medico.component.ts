@@ -21,7 +21,7 @@ export class MedicoComponent implements OnInit {
   public medicoForm: FormGroup;
   public hospitales: Hospital[] = [];
   public hospitalSeleccionado: Hospital;
-  public medicoSeleccionado: Medico;
+  public medicoSeleccionado: Medico = new Medico();
   public imgSubs: Subscription;
 
   constructor( private fb: FormBuilder,

@@ -67,6 +67,12 @@ export class BusquedasService {
     );
   }
 
+  buscarGlobal(valor: string) {
+
+    const url = `${ this.base_url }/todo/${ valor }`;
+    return this.http.get( url, this.headers );
+  }
+
 
 
 }
